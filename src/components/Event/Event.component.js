@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import("./Event.styles.css");
+import "./Event.styles.css";
 
 class Event extends Component {
   constructor() {

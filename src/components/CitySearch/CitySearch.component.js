@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import "./CitySearch.styles.css";
+
 class CitySearch extends Component {
   constructor() {
     super();
