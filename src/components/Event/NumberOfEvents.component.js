@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+
+import "./NumberOfEvents.styles.css";
+
 class NumberOfEvents extends Component {
   constructor() {
     super();
@@ -6,7 +9,7 @@ class NumberOfEvents extends Component {
       numberOfEvents: 32,
     };
   }
-  handleInputChanged = event => {
+  handleInputChanged = (event) => {
     const value = event.target.value;
     this.setState({ numberOfEvents: value });
   };

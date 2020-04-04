@@ -2,6 +2,8 @@ import React from "react";
 import { shallow } from "enzyme";
 import CitySearch from "../components/CitySearch/CitySearch.component";
 
+import { mockSuggestions } from "../mock-data/mock-suggestions";
+
 describe("<CitySearch/> component", () => {
   let CitySearchWrapper;
   beforeAll(() => {
@@ -29,41 +31,31 @@ describe("<CitySearch/> component", () => {
       suggestions.length
     );
     for (let i = 0; i < suggestions.length; i += 1) {
-      expect(
-        CitySearchWrapper.find(".suggestions li")
-          .at(i)
-          .text()
-      ).toBe(suggestions[i].name_string);
+      expect(CitySearchWrapper.find(".suggestions li").at(i).text()).toBe(
+        suggestions[i].name_string
+      );
     }
   });
 
-  test("click on suggestion would change query state", () => {
+  test("click on suggestion would change query state and empty the list of suggetstions", () => {
     CitySearchWrapper.setState({
-      suggestions: [
-        {
-          city: "Munich",
-          country: "de",
-          localized_country_name: "Germany",
-          name_string: "Munich, Germany",
-          zip: "meetup3",
-          lat: 48.14,
-          lon: 11.58,
-        },
-        {
-          city: "Munich",
-          country: "us",
-          localized_country_name: "USA",
-          state: "ND",
-          name_string: "Munich, North Dakota, USA",
-          zip: "58352",
-          lat: 48.66,
-          lon: -98.85,
-        },
-      ],
+      mockSuggestions,
     });
-    CitySearchWrapper.find(".suggestions li")
-      .at(0)
-      .simulate("click");
+    expect(CitySearchWrapper.find(".suggestions li")).toHaveLength(2);
+    CitySearchWrapper.find(".suggestions li").at(0).simulate("click");
     expect(CitySearchWrapper.state("query")).toBe("Munich, Germany");
+    expect(CitySearchWrapper.find(".suggestions li")).toHaveLength(0);
+  });
+});
+
+//Integration Tests
+describe("<CitySearch /> integration", () => {
+  test("get a list of cities when user searches for Munich", async () => {
+    const CitySearchWrapper = shallow(<CitySearch updateEvents={() => {}} />);
+    CitySearchWrapper.find(".city").simulate("change", {
+      target: { value: "Munich" },
+    });
+    await CitySearchWrapper.update();
+    expect(CitySearchWrapper.state("suggestions")).toEqual(mockSuggestions);
   });
 });

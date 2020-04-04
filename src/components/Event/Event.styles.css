@@ -1,0 +1,46 @@
+.event {
+  padding: 10px 10px 20px;
+  margin-bottom: 10px;
+  text-align: left;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  position: relative;
+}
+
+.event_button {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  background-color: #eee;
+}
+
+.event_button:hover {
+  background-color: #bcdcdb;
+}
+
+.event_name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.event_date {
+  text-decoration: underline;
+}
+.going,
+.visibility {
+  font-style: italic;
+}
+
+.event_details {
+  margin-left: 10px;
+  margin-bottom: 15px;
+}
+.description {
+  overflow-x: hidden;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
